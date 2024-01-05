@@ -1,7 +1,6 @@
 # Somestuff you might need to know :
-  1- the car list loaded from the rest_api is saved on launch inside the Car.carList static ArrayList of Car objects
-  
-  2- the database name is stored inside the User.dmName static String belonging tot he UserClass
+    1- the car list loaded from the rest_api is saved on launch inside the Car.carList static ArrayList of Car objects
+    2- the database name is stored inside the User.dmName static String belonging tot he UserClass
 ## Database structure
 ### Tables : 
         1- USER, stores email account and all other relevant infromation required by the project description(No Users are loaded at start, you can find some code you can uncomment that loads two rows, 1 Admin and 1 Normal User,)
@@ -18,7 +17,7 @@
         
 ## Created Fragments 
 ### NavigationMenuFragment:
-    contains buttons to fulfil all the options required by the spec, e.g. Home, reserved, special offers .....
+    contains buttons to fulfil all the options required by the spec, e.g. Home, reserved, special offers .....(currently the buttons will send you to empty activities that we need to implement)
 
     also contains textViews that give a description to where each button leads
 ### InputFieldsFragment:
@@ -26,4 +25,8 @@
     Also contains spinners for other stuff like gender, country and cities
 
     cities spinner and phone code text view are automatically filled with appropriate values depending on the last chosen value of the country spinner
-    
+
+# What we need to do :
+    1- each of the activities that can be reached by the navigation menu are currently empty and need implementation
+    2- there's a chance that the current database structure needs to be changed, but I don't know
+
