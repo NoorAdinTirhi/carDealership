@@ -28,6 +28,9 @@
 3- USER and CAR: many to many, favorites (multiple users have multiple favorited cars)
 
 4- USER and CAR: many to many, resereves (multiple useres have multiple reserved cars)
+
+![image](https://github.com/NoorAdinTirhi/carDealership/assets/115925101/ee37f6b1-82de-4ac2-b4a7-9087dffda839)
+
         
 ## Created Fragments 
 ### NavigationMenuFragment:
