@@ -1,11 +1,13 @@
 # Somestuff you might need to know :
     1- the car list loaded from the rest_api is saved on launch inside the Car.carList static ArrayList of Car objects
     2- the database name is stored inside the User.dmName static String belonging tot he UserClass
+    3- a singelton tagged with "loggedInEmail" is saved in shared preferences, and is used to hold who is currently logged in. 
 ## Database structure
 ### Tables : 
-        1- USER, stores email account and all other relevant infromation required by the project description(No Users are loaded at start, you can find some code you can uncomment that loads two rows, 1 Admin and 1 Normal User,)
+        1- USER, stores email account and all other relevant infromation required by the project description(No Users are loaded at start, you can find some code you can uncomment that loads two rows, 1 Admin and 1 Normal User), 
+           each row contains a fields that says if the email in this row is the "remembered" user or not.
         2- CAR, stores car details loaded from the rest API (currently the car information is not Loaded into this table)
-        3- COUNTRY, static table that holds a list of all countries and their relevant phone code(filled at the onCreate() of the SignUpActivity)
+        3- COUNTRY, static table that holds a list of all countries and their relevant phone code(filled at the onCreate() of the LoginActivity)
         4- CITY, static table that holds a list of cities and the countries they belong to
         5- FAVORITE, holds list of cars and users that have favorited them(empty at runtime, should be filled with app use)
         6- RESERVED, holds list of cars and useres that have reserved them(empty at runtime, should be filled with app use)
