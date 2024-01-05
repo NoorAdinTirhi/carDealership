@@ -1,6 +1,9 @@
 package com.example.cardealership;
 
+import java.util.ArrayList;
+
 public class Car {
+    static ArrayList<Car> carList = new ArrayList<Car>();
     private String type;
     private int id;
 
@@ -11,6 +14,7 @@ public class Car {
                 ", id=" + id +
                 '}';
     }
+
 
     public void setType(String type) {
         this.type = type;

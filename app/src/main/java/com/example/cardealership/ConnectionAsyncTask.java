@@ -30,7 +30,8 @@ public class ConnectionAsyncTask extends AsyncTask<String, String,
             super.onPostExecute(s);
             Log.d("test", s);
             ((MainActivity) activity).setButtonText("connected");
-            ArrayList<Car> cars = CarJsonParser.getObjectFromJson(s);
+            Car.carList = CarJsonParser.getObjectFromJson(s);
+            Log.d("carListTest", Car.carList.toString());
             ((MainActivity) activity).moveToLogin();
 //            ((MainActivity) activity).fillCars(cars);
         }catch(Exception e){
