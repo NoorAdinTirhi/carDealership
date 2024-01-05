@@ -4,27 +4,149 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#131545"
+    android:background="#025950"
     tools:context=".NavigationMenuFragment">
 
     <Button
-        android:id="@+id/buttonFragment"
+        android:id="@+id/buttonHome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="7dp"
         android:layout_marginLeft="7dp"
         android:layout_marginTop="7dp"
-        android:backgroundTint="#025950"
-        android:text="Home" />
+        android:backgroundTint="#131545"
+        android:text="HOME" />
     <TextView
-        android:id="@+id/textViewFragment"
+        android:id="@+id/textViewHome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="4dp"
         android:layout_marginLeft="4dp"
+        android:layout_marginBottom="20dp"
         android:textColor="@color/white"
         android:gravity="center"
-        android:text="FragmentDescription"/>
+        android:text="View All Car Types and Relevant Information"/>
+
+    <Button
+        android:id="@+id/buttonReservation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="7dp"
+        android:backgroundTint="#131545"
+        android:text="RESERVATIONS" />
+    <TextView
+        android:id="@+id/textViewReservation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:text="View All Cars You've Reserved"/>
+
+    <Button
+        android:id="@+id/buttonCarMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="7dp"
+        android:backgroundTint="#131545"
+        android:text="CAR MENU" />
+    <TextView
+        android:id="@+id/textCarMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:text="View All Car Types and Relevant Information"/>
+
+    <Button
+        android:id="@+id/buttonFavorites"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="7dp"
+        android:backgroundTint="#131545"
+        android:text="YOUR FAVORITES" />
+    <TextView
+        android:id="@+id/textFavorties"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:text="View Your Favorites"/>
+
+    <Button
+        android:id="@+id/buttonSpecialOffers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="7dp"
+        android:backgroundTint="#131545"
+        android:text="SPECIAL OFFERS" />
+    <TextView
+        android:id="@+id/textViewSpecialOffers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:text="View Special Offers"/>
+
+    <Button
+        android:id="@+id/buttonProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="7dp"
+        android:backgroundTint="#131545"
+        android:text="PROFILE" />
+    <TextView
+        android:id="@+id/textViewProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:text="View and Edit Profile Settings"/>
+
+    <Button
+        android:id="@+id/buttonCallorFindUS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="7dp"
+        android:backgroundTint="#131545"
+        android:text="CALL OR FIND US" />
+    <TextView
+        android:id="@+id/textViewCallorFindUs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:text="Want To Call Us? Click Here"/>
+
 
 
 </LinearLayout>

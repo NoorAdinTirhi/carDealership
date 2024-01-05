@@ -13,7 +13,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        DataBaseHelper dataBaseHelper = new DataBaseHelper(HomeActivity.this, "userDB2", null,1);
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(HomeActivity.this, User.dbName, null,1);
 
         Cursor cursor = dataBaseHelper.getAllUsers();
 

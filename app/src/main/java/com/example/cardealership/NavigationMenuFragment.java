@@ -1,5 +1,6 @@
 package com.example.cardealership;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -64,16 +65,77 @@ public class NavigationMenuFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_navigation_menu_button, container, false);
     }
-
-
-
-
+	
+	public Button buttonHome;
+    public Button buttonCarMenu;
+    public Button buttonFavorites ;
+    public Button buttonSpecialOffers;
+    public Button buttonProfile ;
+    public Button buttonCallorFindUs;
+    public Button buttonReservations;
+	
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Button button = (Button) getActivity().findViewById(R.id.buttonFragment);
-        TextView textView = (TextView) getActivity().findViewById(R.id.textViewFragment);
-        button.setText("HOME");
-        textView.setText("View Your History");
+        buttonHome           = (Button) getActivity().findViewById(R.id.buttonHome);
+        buttonReservations   = (Button) getActivity().findViewById(R.id.buttonReservation);
+        buttonCarMenu        = (Button) getActivity().findViewById(R.id.buttonCarMenu);
+        buttonFavorites      = (Button) getActivity().findViewById(R.id.buttonFavorites);
+        buttonSpecialOffers  = (Button) getActivity().findViewById(R.id.buttonSpecialOffers);
+        buttonProfile        = (Button) getActivity().findViewById(R.id.buttonProfile);
+        buttonCallorFindUs   = (Button) getActivity().findViewById(R.id.buttonCallorFindUS);
+
+        buttonHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().startActivity(new Intent(getActivity(), HomeActivity.class));
+            }
+        });
+
+        buttonReservations.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().startActivity(new Intent(getActivity(), ReservationsActivity.class));
+            }
+        });
+
+        buttonCarMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().startActivity(new Intent(getActivity(), CarMenuActivity.class));
+            }
+        });
+
+        buttonFavorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().startActivity(new Intent(getActivity(), FavoritesActivity.class));
+            }
+        });
+
+        buttonSpecialOffers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().startActivity(new Intent(getActivity(), SpecialOffersActivity.class));
+            }
+        });
+
+        buttonProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().startActivity(new Intent(getActivity(), ProfileActivity.class));
+            }
+        });
+
+        buttonCallorFindUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().startActivity(new Intent(getActivity(), CallorFindUsActivity.class));
+            }
+        });
+    }
+
+    public String getButtonHome(){
+        return "NOOR";
     }
 }

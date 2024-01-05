@@ -41,6 +41,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(CITY) REFERENCES CITY(Name)" +
                 ")");
 
+        db.execSQL("CREATE TABLE CAR(" +
+                "ID INTEGER PRIMARY KEY," +
+                "Type VARCHAR(50) NOT NULL" +
+                ")");
+
+        db.execSQL("CREATE TABLE FAVORITES(" +
+                "Email VARCHAR(50) NOT NULL," +
+                "CarID INTEGER NOT NULL," +
+                "FOREIGN KEY(Email) REFERENCES USER(Email)," +
+                "FOREIGN KEY(CarID) REFERENCES CAR(ID)," +
+                "PRIMARY KEY(Email, CarID)" +
+                ")");
+
+        db.execSQL("CREATE TABLE RESERVATION(" +
+                "Email VARCHAR(50) NOT NULL," +
+                "CarID INTEGER NOT NULL," +
+                "FOREIGN KEY(Email) REFERENCES USER(Email)," +
+                "FOREIGN KEY(CarID) REFERENCES CAR(ID)," +
+                "PRIMARY KEY(Email, CarID)" +
+                ")");
+
     }
 
     @Override

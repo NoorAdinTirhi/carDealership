@@ -15,6 +15,24 @@
         android:theme="@style/Theme.CarDealership"
         tools:targetApi="31">
         <activity
+            android:name=".ReservationsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CallorFindUsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SpecialOffersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FavoritesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CarMenuActivity"
+            android:exported="false" />
+        <activity
             android:name=".NavigationActivity"
             android:exported="false" />
         <activity

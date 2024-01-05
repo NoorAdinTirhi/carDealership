@@ -42,58 +42,14 @@
         app:layout_constraintEnd_toEndOf="@+id/textViewNavigationHeader" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentHome"
+        android:id="@+id/fragmentNavigation"
         android:name="com.example.cardealership.NavigationMenuFragment"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewNavigationHeader" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentCarMenu"
-        android:name="com.example.cardealership.NavigationMenuFragment"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentHome" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentFavourites"
-        android:name="com.example.cardealership.NavigationMenuFragment"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentCarMenu" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentSpecialOffers"
-        android:name="com.example.cardealership.NavigationMenuFragment"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentFavourites" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentProfile"
-        android:name="com.example.cardealership.NavigationMenuFragment"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentSpecialOffers" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentCallorFindUs"
-        android:name="com.example.cardealership.NavigationMenuFragment"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragmentProfile" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

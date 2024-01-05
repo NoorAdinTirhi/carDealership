@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InputFieldsFragment">
+
+    <TextView
+        android:id="@+id/textViewAreaCode"
+        android:layout_width="68dp"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:text="-----"
+        app:layout_constraintStart_toEndOf="@+id/textView16"
+        app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+    <TextView
+        android:id="@+id/textView16"
+        app:layout_constraintStart_toStartOf="@+id/textView15"
+        app:layout_constraintTop_toBottomOf="@+id/textView15"
+        android:layout_width="68dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="Phone#" />
+
+    <Spinner
+        android:id="@+id/spinnerCountrySignUp"
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toTopOf="@+id/textView14"
+        android:layout_width="266dp"
+        android:layout_height="45dp" />
+
+    <Spinner
+        android:id="@+id/spinnerCitySignUp"
+        app:layout_constraintStart_toEndOf="@+id/textView15"
+        app:layout_constraintTop_toTopOf="@+id/textView15"
+        android:layout_width="266dp"
+        android:layout_height="45dp" />
+
+    <TextView
+        android:id="@+id/textView15"
+        app:layout_constraintStart_toStartOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/textView14"
+        android:layout_width="68dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="Cities" />
+
+    <TextView
+        android:id="@+id/textView14"
+        app:layout_constraintStart_toStartOf="@+id/textView13"
+        app:layout_constraintTop_toBottomOf="@+id/textView13"
+        android:layout_width="68dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="Country" />
+
+    <TextView
+        android:id="@+id/textView13"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView12"
+        android:layout_width="68dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="Confirm\nPassword" />
+
+    <TextView
+        android:id="@+id/textView12"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        android:layout_width="68dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="Password" />
+
+    <TextView
+        android:id="@+id/textView11"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/editTextFname"
+        android:layout_width="68dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="GENDER" />
+
+    <EditText
+        android:id="@+id/editTextLname"
+        app:layout_constraintEnd_toEndOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="@+id/textView10"
+        app:layout_constraintTop_toTopOf="@+id/editTextFname"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:ems="10"
+        android:hint="Last Name"
+        android:inputType="text"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/textView10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView9"
+        android:layout_width="68dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="88dp"
+        android:gravity="center"
+        android:text="LAST NAME" />
+
+    <TextView
+        android:id="@+id/textView9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        android:layout_width="68dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="FIRST NAME" />
+
+    <TextView
+        android:id="@+id/textView3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        android:layout_width="68dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="EMAIL" />
+
+    <EditText
+        android:id="@+id/editTextEmailSignUp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_width="266dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:hint="example@examplemail.com"
+        android:inputType="textEmailAddress" />
+
+
+    <EditText
+        android:id="@+id/editTextFname"
+        app:layout_constraintEnd_toEndOf="@+id/textView9"
+        app:layout_constraintHorizontal_bias="0.534"
+        app:layout_constraintStart_toStartOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:ems="10"
+        android:hint="First Name"
+        android:inputType="text"
+        android:text="" />
+
+    <Spinner
+        android:id="@+id/spinnerGenderSignUp"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toTopOf="@+id/textView11"
+        android:layout_width="266dp"
+        android:layout_height="45dp" />
+
+    <EditText
+        android:id="@+id/editTextPasswordSignUp"
+        app:layout_constraintStart_toEndOf="@+id/textView12"
+        app:layout_constraintTop_toTopOf="@+id/textView12"
+        android:layout_width="266dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/editTextPasswordConfirm"
+        app:layout_constraintStart_toEndOf="@+id/textView13"
+        app:layout_constraintTop_toTopOf="@+id/textView13"
+        android:layout_width="266dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/editTextPhone"
+        app:layout_constraintStart_toEndOf="@+id/textViewAreaCode"
+        app:layout_constraintTop_toTopOf="@+id/textViewAreaCode"
+        android:layout_width="198dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="phone" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

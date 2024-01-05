@@ -1,6 +1,7 @@
 package com.example.cardealership;
 
 public class User {
+    static String dbName = "ourDataBase";
     String email;
 
     public User(String email, String fName, String lName, String gender, String password, String country, String city, String phoneNO) {

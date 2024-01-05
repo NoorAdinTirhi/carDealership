@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
 
     CheckBox checkBox;
 
-    DataBaseHelper dataBaseHelper = new DataBaseHelper(LoginActivity.this, "userDB2", null,1);
+    DataBaseHelper dataBaseHelper = new DataBaseHelper(LoginActivity.this, User.dbName, null,1);
 
 
     void initTables(DataBaseHelper dataBaseHelper){
