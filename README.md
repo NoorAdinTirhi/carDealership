@@ -1,4 +1,4 @@
-# Somestuff you might need to know
+# Somestuff you might need to know :
   1- the car list loaded from the rest_api is saved on launch inside the Car.carList static ArrayList of Car objects\n
   2- the database name is stored inside the User.dmName static String belonging tot he UserClass
 ## Database structure
