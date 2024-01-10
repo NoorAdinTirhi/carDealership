@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#025950"
+    tools:context=".AdminNavigationMenuFragment">
+
+    <Button
+        android:id="@+id/buttonDeleteCustomer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="7dp"
+        android:backgroundTint="#131545"
+        android:text="DELETE CUSTOMER" />
+
+    <TextView
+        android:id="@+id/textViewDeleteCustomer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:text="View Customer and Delete as Needed"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/buttonAddAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="7dp"
+        android:backgroundTint="#131545"
+        android:text="ADD ADMIN" />
+
+    <TextView
+        android:id="@+id/textViewAddAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:text="Add New Admin User"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/buttonViewReserves"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="7dp"
+        android:backgroundTint="#131545"
+        android:text="VIEW RESERVES" />
+
+    <TextView
+        android:id="@+id/textViewReserves"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:text="View All Reserves With Customers and Dates"
+        android:textColor="@color/white" />
+
+</LinearLayout>

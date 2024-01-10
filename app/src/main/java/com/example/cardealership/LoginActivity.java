@@ -47,8 +47,8 @@ public class LoginActivity extends AppCompatActivity {
         dataBaseHelper.insertCity("RiycountryAdh", "Saudi Arabia");
         dataBaseHelper.insertCity("Jeddah", "Saudi Arabia");
 
-        //Insert 1 admin and 1 normal user
-        //normal user
+//        //Insert 1 admin and 1 normal user
+//        //normal user
 //        dataBaseHelper.insertUser(LoginActivity.this, new User(
 //                "nooradintirhi@gmail.com",
 //                "NoorAdin",
@@ -78,15 +78,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    String getCurrentUser(DataBaseHelper dataBaseHelper){
-         Cursor cursor = dataBaseHelper.getAllUsers();
-         while(cursor.moveToNext()){
-             if (cursor.getInt(7) == 1)
-                 return cursor.getString(0);
-         }
-         return null;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,11 +94,18 @@ public class LoginActivity extends AppCompatActivity {
 
         initTables(dataBaseHelper);
 
-        String currentUser = getCurrentUser(dataBaseHelper);
-        if (currentUser != null){
+        String currentUser = sharedPrefManager.readString("RememberedEmail", "NoUser");
+        if (!currentUser.equals("NoUser")){
             sharedPrefManager.writeString("loggedInEmail", currentUser);
-            LoginActivity.this.startActivity( new Intent(LoginActivity.this, NavigationActivity.class));
-            finish();
+            Cursor currentUserCursor = dataBaseHelper.getUserEmailPassword(currentUser);
+            while(currentUserCursor.moveToNext()){
+                if (currentUserCursor.getInt(6) == 1){
+                    LoginActivity.this.startActivity(new Intent(LoginActivity.this, AdminNavigationMenuActivity.class));
+                } else {
+                    LoginActivity.this.startActivity(new Intent(LoginActivity.this, NavigationActivity.class));
+                }
+                finish();
+            }
         }
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -118,9 +116,16 @@ public class LoginActivity extends AppCompatActivity {
                     if (registeredUsers.getString(4).equals(editTextPwd.getText().toString())){
                         sharedPrefManager.writeString("loggedInEmail", editTextEmail.getText().toString());
                         if (checkBox.isChecked()){
-                            dataBaseHelper.setCurrentUser(editTextEmail.getText().toString());
+                            sharedPrefManager.writeString("RememberedEmail", editTextEmail.getText().toString());
+                        }else{
+                            sharedPrefManager.writeString("RememberedEmail", "NoUser");
                         }
-                        LoginActivity.this.startActivity( new Intent(LoginActivity.this, NavigationActivity.class));
+
+                        if (registeredUsers.getInt(6) == 1){
+                            LoginActivity.this.startActivity(new Intent(LoginActivity.this, AdminNavigationMenuActivity.class));
+                        } else {
+                            LoginActivity.this.startActivity(new Intent(LoginActivity.this, NavigationActivity.class));
+                        }
                         finish();
                     }else{
                         Toast.makeText(LoginActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();

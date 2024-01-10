@@ -36,7 +36,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "Password VARCHAR(50) NOT NULL," +
                 "City VARCHAR(50)," +
                 "Admin BOOLEAN NOT NULL DEFAULT 0," +
-                "CurrentUser BOOLEAN NOT NULL DEFAULT 0," +
                 "PhoneNo VARCHAR(9) NOT NULL," +
                 "FOREIGN KEY(CITY) REFERENCES CITY(Name)" +
                 ")");
@@ -57,6 +56,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE RESERVATION(" +
                 "Email VARCHAR(50) NOT NULL," +
                 "CarID INTEGER NOT NULL," +
+                "ReserveDate DATE NOT NULL," +
                 "FOREIGN KEY(Email) REFERENCES USER(Email)," +
                 "FOREIGN KEY(CarID) REFERENCES CAR(ID)," +
                 "PRIMARY KEY(Email, CarID)" +
@@ -101,18 +101,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }catch(SQLiteConstraintException e){
             Toast.makeText(context, "Email already registered", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    public void setCurrentUser(String email){
-        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        ContentValues contentValues1 = new ContentValues();
-        ContentValues contentValues2 = new ContentValues();
-
-        contentValues1.put("CurrentUser", true);
-        contentValues2.put("CurrentUser", false);
-
-        sqLiteDatabase.update("USER", contentValues2,null,null);
-        sqLiteDatabase.update("USER", contentValues1, "Email = ?", new String[]{email});
     }
 
     public Cursor getAllUsers(){

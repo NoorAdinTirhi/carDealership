@@ -25,7 +25,9 @@ public class NavigationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 NavigationActivity.this.startActivity( new Intent(NavigationActivity.this, LoginActivity.class));
-                dataBaseHelper.setCurrentUser("-----");
+                //No remembered email
+                sharedPrefManager.writeString("RememberedEmail", "NoUser");
+                //No user is currently logged in
                 sharedPrefManager.writeString("loggedInEmail","NoUser");
                 NavigationActivity.this.finish();
             }
