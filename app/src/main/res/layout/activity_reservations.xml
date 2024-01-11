@@ -6,4 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".ReservationsActivity">
 
+    <ImageView
+        android:id="@+id/imageBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentHeader"
+        app:srcCompat="@drawable/dca21be92ef10ecd0b4974fa648d6df3" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentHeader"
+        android:name="com.example.cardealership.HeaderLabelFragment"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

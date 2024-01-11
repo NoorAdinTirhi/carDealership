@@ -9,7 +9,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class DataBaseHelper extends SQLiteOpenHelper {
+
+    static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     public DataBaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version){
         super(context, name, factory, version);
     }
@@ -42,7 +47,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE CAR(" +
                 "ID INTEGER PRIMARY KEY," +
-                "Type VARCHAR(50) NOT NULL" +
+                "Type VARCHAR(50) NOT NULL," +
+                "Price INTEGER NOT NULL" +
                 ")");
 
         db.execSQL("CREATE TABLE FAVORITES(" +
@@ -61,7 +67,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(CarID) REFERENCES CAR(ID)," +
                 "PRIMARY KEY(Email, CarID)" +
                 ")");
-
     }
 
     @Override
@@ -113,6 +118,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return sqLiteDatabase.rawQuery("SELECT * FROM USER WHERE Email = ?", new String[]{email});
     }
 
+    public Cursor getNonAdmins (){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM USER WHERE Admin = ?", new String[]{"0"});
+    }
+
+    public void deleteUser(String email){
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        sqLiteDatabase.delete("USER", "Email = ?", new String[]{email});
+    }
+
+
+
     public void insertCity(String name, String country){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -145,11 +162,44 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return sqLiteDatabase.rawQuery("SELECT * FROM COUNTRY", null);
     }
 
+    public void insertCar(int ID, String type, int price){
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("ID", ID);
+        contentValues.put("Type", type);
+        contentValues.put("Price", price);
+        sqLiteDatabase.insert("Car", null, contentValues);
+
+    }
+
+    public Cursor getAllCars(){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM CAR", null);
+    }
+
     public void clearTables(){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         sqLiteDatabase.delete("CITY", null, null);
         sqLiteDatabase.delete("COUNTRY", null, null);
-//        sqLiteDatabase.delete("USER", null, null);
+        sqLiteDatabase.delete("USER", null, null);
+        sqLiteDatabase.delete("CAR", null, null);
+        sqLiteDatabase.delete("FAVORITES", null, null);
+        sqLiteDatabase.delete("RESERVATION", null, null);
+    }
+
+    public void insertReservation(String email, int carID, Date reserveDate){
+        String dateString = formatter.format(reserveDate);
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("Email", email);
+        contentValues.put("CarID", carID);
+        contentValues.put("ReserveDate", dateString);
+        sqLiteDatabase.insert("RESERVATION", null, contentValues);
+    }
+
+    public Cursor getReservations(){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT USER.fName AS fName, USER.lName AS lName, RESERVATION.ReserveDate AS date, CAR.Type AS Type, CAR.ID AS carID FROM CAR,RESERVATION,USER WHERE USER.Email = RESERVATION.Email AND CAR.ID = RESERVATION.CarID", null);
     }
 
     public void fillCities(){

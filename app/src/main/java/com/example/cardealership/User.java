@@ -1,7 +1,7 @@
 package com.example.cardealership;
 
 public class User {
-    static String dbName = "ourDataBase1";
+    static String dbName = "ourDataBase2";
     String email;
 
     public User(String email, String fName, String lName, String gender, String password, String country, String city, String phoneNO) {
@@ -98,5 +98,9 @@ public class User {
                 ", city='" + city + '\'' +
                 ", phoneNO='" + phoneNO + '\'' +
                 '}';
+    }
+
+    public long getId() {
+        return 5;
     }
 }

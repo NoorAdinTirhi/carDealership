@@ -1,6 +1,5 @@
 package com.example.cardealership;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -13,10 +12,10 @@ import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link AdminNavigationMenuFragment#newInstance} factory method to
+ * Use the {@link ConfirmationFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AdminNavigationMenuFragment extends Fragment {
+public class ConfirmationFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +26,7 @@ public class AdminNavigationMenuFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public AdminNavigationMenuFragment() {
+    public ConfirmationFragment() {
         // Required empty public constructor
     }
 
@@ -37,11 +36,11 @@ public class AdminNavigationMenuFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AdminNavigationMenuFragment.
+     * @return A new instance of fragment ConfirmationFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AdminNavigationMenuFragment newInstance(String param1, String param2) {
-        AdminNavigationMenuFragment fragment = new AdminNavigationMenuFragment();
+    public static ConfirmationFragment newInstance(String param1, String param2) {
+        ConfirmationFragment fragment = new ConfirmationFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -62,38 +61,29 @@ public class AdminNavigationMenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_admin_navigation_menu, container, false);
+        return inflater.inflate(R.layout.fragment_confirmation, container, false);
     }
 
-    public Button buttonDeleteCustomer;
-    public Button buttonAddAdmin;
-    public Button buttonViewReserves;
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        buttonDeleteCustomer = (Button) getActivity().findViewById(R.id.buttonDeleteCustomer);
-        buttonAddAdmin = (Button) getActivity().findViewById(R.id.buttonAddAdmin);
-        buttonViewReserves = (Button) getActivity().findViewById(R.id.buttonViewReserves);
+        Button buttonYes = (Button) getActivity().findViewById(R.id.buttonYes);
+        Button buttonCancel = (Button) getActivity().findViewById(R.id.buttonCancel);
 
-        buttonDeleteCustomer.setOnClickListener(new View.OnClickListener() {
+        ConfirmationCommunicator communicator = (ConfirmationCommunicator)getActivity();
+
+        buttonYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().startActivity(new Intent(getActivity(), DeleteCustomerActivity.class));
+                communicator.respondYes();
             }
         });
 
-        buttonAddAdmin.setOnClickListener(new View.OnClickListener() {
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getActivity().startActivity(new Intent(getActivity(), AddAdminActivity.class));
-            }
-        });
-
-        buttonViewReserves.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().startActivity(new Intent(getActivity(), AdminViewsReservesActivity.class));
+                communicator.respondCancel();
             }
         });
     }

@@ -12,6 +12,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Date;
+import java.util.Random;
+
 public class LoginActivity extends AppCompatActivity {
     EditText editTextEmail;
     EditText editTextPwd;
@@ -25,6 +28,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
     void initTables(DataBaseHelper dataBaseHelper){
+        Random rand = new Random();
+
         dataBaseHelper.clearTables();
 
         dataBaseHelper.insertCountry("Palestinian Territory", "00970");
@@ -43,39 +48,45 @@ public class LoginActivity extends AppCompatActivity {
         dataBaseHelper.insertCity("Sidon", "Lebanon");
 
         dataBaseHelper.insertCountry("Saudi Arabia", "00966");
-        dataBaseHelper.insertCity("McountryAdinah", "Saudi Arabia");
-        dataBaseHelper.insertCity("RiycountryAdh", "Saudi Arabia");
+        dataBaseHelper.insertCity("Mdinah", "Saudi Arabia");
+        dataBaseHelper.insertCity("Riyadh", "Saudi Arabia");
         dataBaseHelper.insertCity("Jeddah", "Saudi Arabia");
 
 //        //Insert 1 admin and 1 normal user
-//        //normal user
-//        dataBaseHelper.insertUser(LoginActivity.this, new User(
-//                "nooradintirhi@gmail.com",
-//                "NoorAdin",
-//                "Tirhi",
-//                "Male",
-//                "Ff1!2@3#4$5%",
-//                "Palestinian Territory",
-//                "Ramallah",
-//                "584280013"
-//        ));
-//        //admin user
-//        dataBaseHelper.insertAdminUser(LoginActivity.this, new User(
-//                        "nooradintirhi3@gmail.com",
-//                        "NoorAdin",
-//                        "Tirhi",
-//                        "Male",
-//                        "Ff1!2@3#4$5%",
-//                        "Palestinian Territory",
-//                        "Ramallah",
-//                        "584280013"
-//                ),
-//                true);
+        //normal user
+        dataBaseHelper.insertUser(LoginActivity.this, new User(
+                "nooradintirhi@gmail.com",
+                "NoorAdin",
+                "Tirhi",
+                "Male",
+                "Ff1!2@3#4$5%",
+                "Palestinian Territory",
+                "Ramallah",
+                "584280013"
+        ));
+        //admin user
+        dataBaseHelper.insertAdminUser(LoginActivity.this, new User(
+                        "nooradintirhi3@gmail.com",
+                        "NoorAdin",
+                        "Tirhi",
+                        "Male",
+                        "Ff1!2@3#4$5%",
+                        "Palestinian Territory",
+                        "Ramallah",
+                        "584280013"
+                ),
+                true);
 
-        Cursor testCursor = dataBaseHelper.getAllUsers();
-        while(testCursor.moveToNext()){
-            Log.d("testSQL", testCursor.getString(6));
+        for(Car car : Car.carList)
+            dataBaseHelper.insertCar(car.getId(), car.getType(), rand.nextInt(70000)+30000);
+
+        dataBaseHelper.insertReservation("nooradintirhi@gmail.com", 6, new Date());
+
+        Cursor cursor = dataBaseHelper.getAllCars();
+        while(cursor.moveToNext()){
+            Log.d("carsDBTest", String.format("%d %s %d", cursor.getInt(0), cursor.getString(1), cursor.getInt(2)));
         }
+
     }
 
     @Override
