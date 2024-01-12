@@ -24,4 +24,47 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Spinner
+        android:id="@+id/spinnerFilter"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentHeader" />
+
+    <EditText
+        android:id="@+id/editTextSearchField"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text=""
+        android:hint="Search Parameter"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerFilter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/spinnerFilter" />
+
+    <ListView
+        android:id="@+id/listViewCars"
+        android:layout_width="match_parent"
+        android:layout_height="613dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSearchField" />
+
+    <LinearLayout
+        android:id="@+id/LayoutPopUp"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginTop="1dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentHeader"></LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

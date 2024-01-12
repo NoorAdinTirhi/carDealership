@@ -28,7 +28,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
     void initTables(DataBaseHelper dataBaseHelper){
-        Random rand = new Random();
 
         dataBaseHelper.clearTables();
 
@@ -78,9 +77,13 @@ public class LoginActivity extends AppCompatActivity {
                 true);
 
         for(Car car : Car.carList)
-            dataBaseHelper.insertCar(car.getId(), car.getType(), rand.nextInt(70000)+30000);
+            dataBaseHelper.insertCar(car.getId(), car.getType(), car.getPrice());
 
         dataBaseHelper.insertReservation("nooradintirhi@gmail.com", 6, new Date());
+
+        dataBaseHelper.insertHistoryAct( new HistoryAct("nooradintirhi@gmail.com", new Date(),"testAct"));
+        dataBaseHelper.insertHistoryAct( new HistoryAct("nooradintirhi@gmail.com", new Date(),"testAct2"));
+        dataBaseHelper.insertHistoryAct( new HistoryAct("nooradintirhi@gmail.com", new Date(),"testAct3"));
 
         Cursor cursor = dataBaseHelper.getAllCars();
         while(cursor.moveToNext()){

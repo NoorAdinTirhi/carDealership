@@ -6,6 +6,7 @@ public class Car {
     static ArrayList<Car> carList = new ArrayList<Car>();
     private String type;
     private int id;
+    private int price;
 
     @Override
     public String toString() {
@@ -30,5 +31,13 @@ public class Car {
 
     public int getId() {
         return id;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

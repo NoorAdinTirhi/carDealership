@@ -54,8 +54,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE FAVORITES(" +
                 "Email VARCHAR(50) NOT NULL," +
                 "CarID INTEGER NOT NULL," +
-                "FOREIGN KEY(Email) REFERENCES USER(Email)," +
-                "FOREIGN KEY(CarID) REFERENCES CAR(ID)," +
+                "FOREIGN KEY(Email) REFERENCES USER(Email) " +
+                "ON DELETE CASCADE " +
+                "ON UPDATE CASCADE," +
+                "FOREIGN KEY(CarID) REFERENCES CAR(ID) " +
+                "ON DELETE CASCADE " +
+                "ON UPDATE CASCADE," +
                 "PRIMARY KEY(Email, CarID)" +
                 ")");
 
@@ -63,9 +67,23 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "Email VARCHAR(50) NOT NULL," +
                 "CarID INTEGER NOT NULL," +
                 "ReserveDate DATE NOT NULL," +
-                "FOREIGN KEY(Email) REFERENCES USER(Email)," +
-                "FOREIGN KEY(CarID) REFERENCES CAR(ID)," +
+                "FOREIGN KEY(Email) REFERENCES USER(Email) " +
+                "ON DELETE CASCADE " +
+                "ON UPDATE CASCADE," +
+                "FOREIGN KEY(CarID) REFERENCES CAR(ID) " +
+                "ON DELETE CASCADE " +
+                "ON UPDATE CASCADE," +
                 "PRIMARY KEY(Email, CarID)" +
+                ")");
+
+        db.execSQL("CREATE TABLE HISTORY(" +
+                "ActID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "Email VARCHAR(50) NOT NULL," +
+                "ActDescription VARCHAR(256) NOT NULL," +
+                "ActDate Date NOT NULL," +
+                "FOREIGN KEY(Email) REFERENCES USER(Email) " +
+                "ON DELETE CASCADE " +
+                "ON UPDATE CASCADE" +
                 ")");
     }
 
@@ -185,6 +203,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.delete("CAR", null, null);
         sqLiteDatabase.delete("FAVORITES", null, null);
         sqLiteDatabase.delete("RESERVATION", null, null);
+        sqLiteDatabase.delete("HISTORY", null, null);
     }
 
     public void insertReservation(String email, int carID, Date reserveDate){
@@ -202,9 +221,62 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return sqLiteDatabase.rawQuery("SELECT USER.fName AS fName, USER.lName AS lName, RESERVATION.ReserveDate AS date, CAR.Type AS Type, CAR.ID AS carID FROM CAR,RESERVATION,USER WHERE USER.Email = RESERVATION.Email AND CAR.ID = RESERVATION.CarID", null);
     }
 
-    public void fillCities(){
+    public void insertHistoryAct(HistoryAct historyAct){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put("Email", historyAct.email);
+        contentValues.put("ActDate", formatter.format(historyAct.actDate));
+        contentValues.put("ActDescription", historyAct.actDescription);
+        sqLiteDatabase.insert("HISTORY", null, contentValues);
+    }
+
+    public Cursor getUserHistory(String email){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM HISTORY WHERE Email = ?", new String[]{email});
+    }
+
+    public Cursor getAllHistory(){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM HISTORY",null);
+    }
+
+    public void addToFavorites(Context context, String email, int carID){
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("Email", email);
+        contentValues.put("CarID", carID);
+        sqLiteDatabase.insert("FAVORITES", null, contentValues);
+        Toast.makeText(context, String.format("Car %d  added to %s favorties", carID, email), Toast.LENGTH_SHORT).show();
+    }
+
+    public void removeFromFavorites(String email, int carID){
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        sqLiteDatabase.delete("FAVORITES", "Email = ? and CarID = ?", new String[]{email, String.valueOf(carID)});
+    }
+
+    public Cursor getFavoritesByCarID (Context context, int carID){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM FAVORITES WHERE CarID = ?",new String[]{String.valueOf(carID)});
+    }
+
+    public Cursor getReservesByCarID (int carID){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM RESERVATION WHERE CarID = ?",new String[]{String.valueOf(carID)});
+    }
+
+    public void removeReserve (int carID, String email){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        sqLiteDatabase.delete("RESERVATION", "Email = ? and CarID = ?", new String[]{email, String.valueOf(carID)});
+    }
+
+    public void addToReserves(Context context, String email, int carID, Date reserveDate){
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("Email", email);
+        contentValues.put("CarID", carID);
+        contentValues.put("ReserveDate", formatter.format(reserveDate));
+        sqLiteDatabase.insert("RESERVATION", null, contentValues);
+        Toast.makeText(context, String.format("Car %d  added to %s reservations", carID, email), Toast.LENGTH_SHORT).show();
     }
 
 }
