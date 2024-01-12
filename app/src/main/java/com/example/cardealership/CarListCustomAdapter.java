@@ -41,7 +41,7 @@ public class CarListCustomAdapter extends BaseAdapter implements ListAdapter {
         //just return 0 if your list items do not have an Id variable.
     }
 
-    int [] finalFlagUnreserve = {0};
+
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -77,13 +77,13 @@ public class CarListCustomAdapter extends BaseAdapter implements ListAdapter {
         }
         while(reserves.moveToNext()){
             if (reserves.getString(0).equals(sharedPrefManager.readString("loggedInEmail", "Default")));{
-                buttonFavorites.setText("UNRESERVE");
+                buttonReserves.setText("UNRESERVE");
                 flagUnreserve = 1;
             }
         }
 
         int [] finalFlagUnfavorite = {flagUnfavorite};
-        finalFlagUnreserve[0] = flagUnreserve;
+        int [] finalFlagUnreserve = {flagUnreserve};
         buttonFavorites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,7 +112,7 @@ public class CarListCustomAdapter extends BaseAdapter implements ListAdapter {
                 }else{
                     dataBaseHelper.removeReserve(list.get(position).getId(), sharedPrefManager.readString("loggedInEmail", "Default"));
                     finalFlagUnreserve[0] = 0;
-                    buttonFavorites.setText("RESERVE");
+                    buttonReserves.setText("RESERVE");
                     dataBaseHelper.insertHistoryAct(new HistoryAct(sharedPrefManager.readString("loggedInEmail", "Default"), new Date(), String.format("Removed Car %d from reserves", list.get(position).getId())));
                 }
             }
