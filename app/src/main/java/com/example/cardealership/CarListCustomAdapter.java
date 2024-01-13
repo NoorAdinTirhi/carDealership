@@ -109,6 +109,7 @@ public class CarListCustomAdapter extends BaseAdapter implements ListAdapter {
                 if (finalFlagUnreserve[0] == 0){
                     PopUpCommunicator communicator = (PopUpCommunicator) finalView.getContext();
                     communicator.respondSubmitPopUpLaucnh(list.get(position).getId(), list.get(position).getType(), list.get(position).getPrice());
+                    buttonReserves.setEnabled(false);
                 }else{
                     dataBaseHelper.removeReserve(list.get(position).getId(), sharedPrefManager.readString("loggedInEmail", "Default"));
                     finalFlagUnreserve[0] = 0;
