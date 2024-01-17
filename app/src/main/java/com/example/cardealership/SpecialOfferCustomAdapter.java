@@ -14,12 +14,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.EventListener;
 
-public class CarListCustomAdapter extends BaseAdapter implements ListAdapter {
-    private ArrayList<Car> list = new ArrayList<Car>();
+public class SpecialOfferCustomAdapter extends BaseAdapter implements ListAdapter {
+    private ArrayList<SpecialOffer> list = new ArrayList<SpecialOffer>();
     private Context context;
 
 
-    public CarListCustomAdapter(ArrayList<Car> list, Context context) {
+    public SpecialOfferCustomAdapter(ArrayList<SpecialOffer> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -36,9 +36,7 @@ public class CarListCustomAdapter extends BaseAdapter implements ListAdapter {
 
     @Override
     public long getItemId(int pos) {
-//        return 5;
-        return list.get(pos).getId();
-        //just return 0 if your list items do not have an Id variable.
+        return 0;
     }
 
 
@@ -54,7 +52,7 @@ public class CarListCustomAdapter extends BaseAdapter implements ListAdapter {
 
         //Handle TextView and display string from your list
         TextView textViewCustomer = (TextView)view.findViewById(R.id.textViewCarName);
-        textViewCustomer.setText(list.get(position).getType());
+        textViewCustomer.setText(list.get(position).carModel + "   " + list.get(position).offer+"% OFF");
 
         Button buttonFavorites = (Button) view.findViewById(R.id.buttonFavorite);
         Button buttonReserves  = (Button) view.findViewById(R.id.buttonReserve);
@@ -65,9 +63,9 @@ public class CarListCustomAdapter extends BaseAdapter implements ListAdapter {
 
         DataBaseHelper dataBaseHelper = new DataBaseHelper(finalView.getContext(), User.dbName, null, 1);
 
-        Cursor favorites = dataBaseHelper.getFavoritesByCarID(finalView.getContext() ,list.get(position).getId());
+        Cursor favorites = dataBaseHelper.getFavoritesByCarID(finalView.getContext() ,list.get(position).carID);
 
-        Cursor reserves = dataBaseHelper.getReservesByCarID(list.get(position).getId());
+        Cursor reserves = dataBaseHelper.getReservesByCarID(list.get(position).carID);
 
         while(favorites.moveToNext()){
             if (favorites.getString(0).equals(sharedPrefManager.readString("loggedInEmail", "Default")));{
@@ -89,15 +87,15 @@ public class CarListCustomAdapter extends BaseAdapter implements ListAdapter {
             public void onClick(View v) {
                 PopUpCommunicator communicator = (PopUpCommunicator) finalView.getContext();
                 if (finalFlagUnfavorite[0] == 0) {
-                    dataBaseHelper.addToFavorites(finalView.getContext(),sharedPrefManager.readString("loggedInEmail", "Default"),list.get(position).getId());
+                    dataBaseHelper.addToFavorites(finalView.getContext(),sharedPrefManager.readString("loggedInEmail", "Default"),list.get(position).carID);
                     buttonFavorites.setText("UNFAVORITE");
                     finalFlagUnfavorite[0] = 1;
-                    dataBaseHelper.insertHistoryAct(new HistoryAct(sharedPrefManager.readString("loggedInEmail", "Default"), new Date(), String.format("Add Car %d to favorites", list.get(position).getId())));
+                    dataBaseHelper.insertHistoryAct(new HistoryAct(sharedPrefManager.readString("loggedInEmail", "Default"), new Date(), String.format("Add Car %d to favorites", list.get(position).carID)));
                 }else{
-                    dataBaseHelper.removeFromFavorites(sharedPrefManager.readString("loggedInEmail", "Default"),list.get(position).getId());
+                    dataBaseHelper.removeFromFavorites(sharedPrefManager.readString("loggedInEmail", "Default"),list.get(position).carID);
                     buttonFavorites.setText("FAVORITE");
                     finalFlagUnfavorite[0] = 0;
-                    dataBaseHelper.insertHistoryAct(new HistoryAct(sharedPrefManager.readString("loggedInEmail", "Default"), new Date(), String.format("Removed Car %d from favorites", list.get(position).getId())));
+                    dataBaseHelper.insertHistoryAct(new HistoryAct(sharedPrefManager.readString("loggedInEmail", "Default"), new Date(), String.format("Removed Car %d from favorites", list.get(position).carID)));
 
                 }
             }
@@ -108,25 +106,17 @@ public class CarListCustomAdapter extends BaseAdapter implements ListAdapter {
             public void onClick(View v) {
                 if (finalFlagUnreserve[0] == 0){
                     PopUpCommunicator communicator = (PopUpCommunicator) finalView.getContext();
-                    communicator.respondSubmitPopUpLaucnh(list.get(position).getId(), list.get(position).getType(), list.get(position).getPrice());
-//                    buttonReserves.setEnabled(false);
+                    communicator.respondSubmitPopUpLaucnh(list.get(position).carID, list.get(position).carModel, list.get(position).price);
+                    buttonReserves.setEnabled(false);
                 }else{
-                    dataBaseHelper.removeReserve(list.get(position).getId(), sharedPrefManager.readString("loggedInEmail", "Default"));
+                    dataBaseHelper.removeReserve(list.get(position).carID, sharedPrefManager.readString("loggedInEmail", "Default"));
                     finalFlagUnreserve[0] = 0;
                     buttonReserves.setText("RESERVE");
-                    dataBaseHelper.insertHistoryAct(new HistoryAct(sharedPrefManager.readString("loggedInEmail", "Default"), new Date(), String.format("Removed Car %d from reserves", list.get(position).getId())));
+                    dataBaseHelper.insertHistoryAct(new HistoryAct(sharedPrefManager.readString("loggedInEmail", "Default"), new Date(), String.format("Removed Car %d from reserves", list.get(position).carID)));
                 }
             }
         });
 
-
-        textViewCustomer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopUpCommunicator communicator = (PopUpCommunicator) finalView.getContext();
-                communicator.respondPopUpLaunch(list.get(position).getId(), list.get(position).getType(), list.get(position).getPrice());
-            }
-        });
 
 
         return view;

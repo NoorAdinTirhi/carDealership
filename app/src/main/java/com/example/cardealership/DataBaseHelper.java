@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.health.connect.datatypes.units.Percentage;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -85,6 +86,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 "ON DELETE CASCADE " +
                 "ON UPDATE CASCADE" +
                 ")");
+
+        db.execSQL("CREATE TABLE SPECIALOFFER(" +
+                "SpecialOfferID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "CarID INTEGER NOT NULL ," +
+                "Percentage INTEGER NOT NULL," +
+                "FOREIGN KEY(CarID) REFERENCES CAR(ID) " +
+                "ON DELETE CASCADE " +
+                "ON DELETE CASCADE" +
+                ")");
     }
 
     @Override
@@ -106,6 +116,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }catch(SQLiteConstraintException e){
             Toast.makeText(context, "Email already registered", Toast.LENGTH_SHORT).show();
         }
+    }
+    public void updateUser(Context context ,User user){
+            SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("Fname", user.getfName());
+            contentValues.put("Lname", user.getlName());
+            contentValues.put("Gender", user.getGender());
+            contentValues.put("Password", user.getPassword());
+            contentValues.put("City", user.getCity());
+            contentValues.put("PhoneNo", user.getPhoneNO());
+            sqLiteDatabase.update("USER",contentValues,"Email = ?", new String[]{user.getEmail()});
+            Log.d("stringsTag", user.getEmail() + " " + user.getfName() + " " + user.getlName());
+
     }
 
     public void insertAdminUser(Context context ,User user, Boolean admin){
@@ -180,6 +203,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return sqLiteDatabase.rawQuery("SELECT * FROM COUNTRY", null);
     }
 
+    public Cursor getCountryByCity(String city){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM CITY WHERE Name = ?", new String[]{city});
+    }
+
     public void insertCar(int ID, String type, int price){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -204,6 +232,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.delete("FAVORITES", null, null);
         sqLiteDatabase.delete("RESERVATION", null, null);
         sqLiteDatabase.delete("HISTORY", null, null);
+        sqLiteDatabase.delete("SPECIALOFFER", null, null);
     }
 
     public void insertReservation(String email, int carID, Date reserveDate){
@@ -259,6 +288,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return sqLiteDatabase.rawQuery("SELECT * FROM FAVORITES WHERE CarID = ?",new String[]{String.valueOf(carID)});
     }
 
+    public Cursor getFavoritesByEmail (String email){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT   CAR.Type AS Type, CAR.ID AS carID, CAR.Price AS price FROM CAR,FAVORITES,USER WHERE USER.Email = FAVORITES.Email AND CAR.ID = FAVORITES.CarID AND USER.Email = ?",new String[]{String.valueOf(email)});
+    }
+
     public Cursor getReservesByCarID (int carID){
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         return sqLiteDatabase.rawQuery("SELECT * FROM RESERVATION WHERE CarID = ?",new String[]{String.valueOf(carID)});
@@ -277,6 +311,32 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put("ReserveDate", formatter.format(reserveDate));
         sqLiteDatabase.insert("RESERVATION", null, contentValues);
         Toast.makeText(context, String.format("Car %d  added to %s reservations", carID, email), Toast.LENGTH_SHORT).show();
+    }
+
+    public void insertSpecialOffer(int carID, int percentage){
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("CarID", carID);
+        contentValues.put("Percentage", percentage);
+        sqLiteDatabase.insert("SPECIALOFFER", null, contentValues);
+    }
+
+    public Cursor getSpecialOfferCar(){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT CAR.Type AS type, CAR.ID AS ID, SPECIALOFFER.Percentage AS Percent, CAR.Price AS price " +
+                " FROM SPECIALOFFER, CAR" +
+                " WHERE CAR.ID = SPECIALOFFER.CarID", null);
+
+    }
+
+    public Cursor getSpecialOffers (){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT * FROM SPECIALOFFER", null);
+    }
+
+    public Cursor getSpecialOffersInfo (){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        return sqLiteDatabase.rawQuery("SELECT CAR.Type, Car.ID, SPECIALOFFER.Percentage FROM SPECIALOFFER, CAR WHERE SPECIALOFFER.CarID = CAR.ID", null);
     }
 
 }

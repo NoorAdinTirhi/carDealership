@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
 
     void initTables(DataBaseHelper dataBaseHelper){
 
-        dataBaseHelper.clearTables();
+//        dataBaseHelper.clearTables();
 
         dataBaseHelper.insertCountry("Palestinian Territory", "00970");
         dataBaseHelper.insertCity("Hebron", "Palestinian Territory");
@@ -84,6 +84,9 @@ public class LoginActivity extends AppCompatActivity {
         dataBaseHelper.insertHistoryAct( new HistoryAct("nooradintirhi@gmail.com", new Date(),"testAct"));
         dataBaseHelper.insertHistoryAct( new HistoryAct("nooradintirhi@gmail.com", new Date(),"testAct2"));
         dataBaseHelper.insertHistoryAct( new HistoryAct("nooradintirhi@gmail.com", new Date(),"testAct3"));
+
+        dataBaseHelper.insertSpecialOffer(2, 10);
+        dataBaseHelper.insertSpecialOffer(3, 15);
 
         Cursor cursor = dataBaseHelper.getAllCars();
         while(cursor.moveToNext()){

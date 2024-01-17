@@ -84,9 +84,9 @@ public class PopUpFragment extends Fragment {
             }
         });
 
-        textViewName.setText(String.valueOf(CarMenuActivity.currentCar.getId()));
-        textViewPrice.setText(String.valueOf(CarMenuActivity.currentCar.getPrice()));
-        textViewType.setText(CarMenuActivity.currentCar.getType());
+        textViewName.setText(String.valueOf(Car.currentCar.getId()));
+        textViewPrice.setText(String.valueOf(Car.currentCar.getPrice()));
+        textViewType.setText(Car.currentCar.getType());
     }
 
 }

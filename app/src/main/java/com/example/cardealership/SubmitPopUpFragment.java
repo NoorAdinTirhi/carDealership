@@ -98,14 +98,15 @@ public class SubmitPopUpFragment extends Fragment {
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dataBaseHelper.addToReserves(getActivity(), sharedPrefManager.readString("loggedInEmail", "Default"), CarMenuActivity.currentCar.getId(), new Date());
+                dataBaseHelper.addToReserves(getActivity(), sharedPrefManager.readString("loggedInEmail", "Default"), Car.currentCar.getId(), new Date());
                 communicator.respondSubmitPopUpExit();
-                dataBaseHelper.insertHistoryAct(new HistoryAct(sharedPrefManager.readString("loggedInEmail", "Default"), new Date(), String.format("Removed Car %d from reserves",CarMenuActivity.currentCar.getId())));
+                dataBaseHelper.insertHistoryAct(new HistoryAct(sharedPrefManager.readString("loggedInEmail", "Default"), new Date(), String.format("Removed Car %d from reserves",Car.currentCar.getId())));
+                getActivity().recreate();
             }
         });
 
-        textViewName.setText(String.valueOf(CarMenuActivity.currentCar.getId()));
-        textViewPrice.setText(String.valueOf(CarMenuActivity.currentCar.getPrice()));
-        textViewType.setText(CarMenuActivity.currentCar.getType());
+        textViewName.setText(String.valueOf(Car.currentCar.getId()));
+        textViewPrice.setText(String.valueOf(Car.currentCar.getPrice()));
+        textViewType.setText(Car.currentCar.getType());
     }
 }

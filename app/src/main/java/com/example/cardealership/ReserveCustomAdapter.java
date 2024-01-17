@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
@@ -42,7 +41,7 @@ public class ReserveCustomAdapter extends BaseAdapter implements ListAdapter {
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.reserves_list_item_layout, null);
+            view = inflater.inflate(R.layout.admin_reserves_list_item_layout, null);
         }
 
         //Handle TextView and display string from your list

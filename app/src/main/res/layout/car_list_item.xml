@@ -30,7 +30,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:backgroundTint="#FFC107"
-        android:text="Favorite"
+        android:text="FAVORITE"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewCarName" />
 
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:backgroundTint="#FF5722"
-        android:text="Reserve"
+        android:text="RESERVE"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/buttonFavorite" />
 

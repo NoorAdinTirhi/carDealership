@@ -41,7 +41,6 @@ public class CarMenuActivity extends AppCompatActivity implements HeaderCommunic
 
     FragmentManager fragmentManager;
 
-    static Car currentCar = new Car();;
 
     DataBaseHelper dataBaseHelper = new DataBaseHelper(CarMenuActivity.this, User.dbName, null,1);
 
@@ -178,9 +177,9 @@ public class CarMenuActivity extends AppCompatActivity implements HeaderCommunic
     public void respondPopUpLaunch(int ID, String type, int price){
         if (fragmentManager.getFragments().contains(popUpFragment))
             return;
-        currentCar.setType(type);
-        currentCar.setId(ID);
-        currentCar.setPrice(price);
+        Car.currentCar.setType(type);
+        Car.currentCar.setId(ID);
+        Car.currentCar.setPrice(price);
 
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -215,9 +214,9 @@ public class CarMenuActivity extends AppCompatActivity implements HeaderCommunic
     public void respondSubmitPopUpLaucnh(int ID, String type, int price){
         if (fragmentManager.getFragments().contains(submitPopUpFragment))
             return;
-        currentCar.setType(type);
-        currentCar.setId(ID);
-        currentCar.setPrice(price);
+        Car.currentCar.setType(type);
+        Car.currentCar.setId(ID);
+        Car.currentCar.setPrice(price);
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.LayoutPopUp, submitPopUpFragment, "submitPopUpFragment");
         fragmentTransaction.commit();

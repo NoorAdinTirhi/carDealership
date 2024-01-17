@@ -8,6 +8,9 @@ public class Car {
     private int id;
     private int price;
 
+    public static Car currentCar = new Car();;
+
+
     @Override
     public String toString() {
         return "Car{" +

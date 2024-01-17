@@ -126,8 +126,8 @@ public class InputFieldsFragment extends Fragment implements AdapterView.OnItemS
 
         dataBaseHelper = new DataBaseHelper(getActivity(), User.dbName, null,1);
 
-        Cursor cursorAllCountries =  dataBaseHelper.getAllCountries();
 
+        Cursor cursorAllCountries =  dataBaseHelper.getAllCountries();
 
         int i = 0;
         // Get Country Spinner Codes
@@ -136,6 +136,9 @@ public class InputFieldsFragment extends Fragment implements AdapterView.OnItemS
             phoneCodes[i] = cursorAllCountries.getString(1);
             i++;
         }
+
+        InputFieldsCommunicator inputFieldsCommunicator = (InputFieldsCommunicator) getActivity();
+        inputFieldsCommunicator.respond();
     }
 
     @Override
@@ -191,5 +194,38 @@ public class InputFieldsFragment extends Fragment implements AdapterView.OnItemS
     public String getCity(){
         return spinnerCity.getSelectedItem().toString();
     }
+
+    public void seTexts(String Email, String fName, String lName, String password, String phone, String gender, String country, String city){
+        editTextEmail.setText(Email);
+        editTextFname.setText(fName);
+        editTextLname.setText(lName);
+        editTextPasswordSignUp.setText(password);
+        editTextPhone.setText(phone);
+
+        int countryIndex = 0, cityIndex = 0, genderIndex = 0;
+        for (int i = 0; i < countries.length; i ++){
+            if (countries[i].equals(country)){
+                countryIndex = i;
+                break;
+            }
+        }
+        for (int i = 0; i < cities.size(); i ++){
+            if (cities.get(i).equals(city)){
+                cityIndex = i;
+                break;
+            }
+        }
+        if (gender.equals("Female"))
+            genderIndex = 1;
+
+        spinnerCountry.setSelection(countryIndex);
+        spinnerCity.setSelection(cityIndex);
+        spinnerGender.setSelection(genderIndex);
+
+        editTextEmail.setEnabled(false);
+
+    }
+
+
 
 }
